@@ -70,10 +70,10 @@ router.post('/api/auth', function(req, res) {
 
 
 
-           var token = jwt.sign({userID: USERS.id}, 'todo-app-super-shared-secret', {expiresIn: '2h'});
+           token = jwt.sign({userID: USERS.id}, 'todo-app-super-shared-secret', {expiresIn: '2h'});
+           
            res.send({token});
     });
-
 /*
   const user = USERS.find(user => user.username == body.username);
   if(!user || body.password != 'todo') return res.sendStatus(401);
@@ -81,6 +81,8 @@ if(user || body.password == 'todo') return console.log( body.password, body.user
   var token = jwt.sign({userID: user.id}, 'todo-app-super-shared-secret', {expiresIn: '2h'});
   res.send({token});
 */});
+//cette ligne bloque l'api sur 401 si client ne renvoit pas authorisation bearer
+//De plus angular guard ne veux pas afficher page si auth n'a pas été lancé (comme au refresh de la page)
 app.use(expressJwt({secret: 'todo-app-super-shared-secret'}).unless({path: ['/api/auth']}));
 
 /*----------------------------ROUTES-------------------------------------*/

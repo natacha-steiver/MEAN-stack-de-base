@@ -44,7 +44,7 @@
           <span *ngIf="!tutoForm.get('titre').valid && tutoForm.get('titre').touched">Please enter titre</span>
 
 
-          <label [hidden]="true"  for="_id">Id: </label>
+          <label [hidden]="true" id="id" for="_id">Id: </label>
 
             <input [hidden]="true"  id="_id" value="{{tuto._id}}" placeholder="{{tuto._id}}" formControlName="_id">
 
@@ -67,7 +67,6 @@
 
 
       <div>
-        <button type="button" name="button" (click) = "updateTuto(titre.value,texte.value)">save</button>
         <button type="submit" [disabled]="!tutoForm.valid" >save2</button>
       </div>
     </form>

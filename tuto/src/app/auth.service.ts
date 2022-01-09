@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable ,BehaviorSubject} from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Injectable()
@@ -9,6 +9,7 @@ export class AuthService {
 
   login(username: string, password: string): Observable<boolean> {
     const obj = {username: username, password: password};
+    
     
     return this.http.post<{token: string}>('/api/auth', obj)
       .pipe(
@@ -25,5 +26,8 @@ export class AuthService {
 
   public get loggedIn(): boolean {
     return (localStorage.getItem('access_token') !== null);
+  }
+  getToken(){
+    return localStorage.getItem('access_token');
   }
 }

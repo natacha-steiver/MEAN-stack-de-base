@@ -1,7 +1,7 @@
 <section id="tutos">
 <h2>{{title}}</h2>
 <h3>Ajouter un tutoriel:</h3>
-<form [formGroup]="tutoForm" (ngSubmit)="onFormSubmit(tutoForm.value)">
+<form id="tutoForm" [formGroup]="tutoForm" (ngSubmit)="onFormSubmit(tutoForm.value)">
   <label for="titre">Titre: </label>
 
     <input  id="titre" placeholder="titre" formControlName="titre">
@@ -9,7 +9,7 @@
       <span *ngIf="!tutoForm.get('titre').valid && tutoForm.get('titre').touched">Please enter titre</span>
 
 
-      <label [hidden]="true"  for="_id">Id: </label>
+      <label id="id" [hidden]="true"  for="_id">Id: </label>
 
         <input [hidden]="true"  id="_id" value="{{tuto._id}}" placeholder="{{tuto._id}}" formControlName="_id">
 

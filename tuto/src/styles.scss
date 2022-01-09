@@ -12,3 +12,6 @@ body{
 li{
   list-style-type: none;
 }
+input:not(#_id),label:not(#id){
+  display:block;
+}

@@ -20,6 +20,8 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from './token.interceptor'
 import { UserListComponentComponent } from './user-list-component/user-list-component.component';
 // ...
 export function tokenGetter() {
@@ -54,7 +56,11 @@ export function tokenGetter() {
 
   ],
   providers: [AuthService,
-  AuthGuard],
+  AuthGuard,{
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule {

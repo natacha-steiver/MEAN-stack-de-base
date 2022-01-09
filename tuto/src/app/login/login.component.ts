@@ -41,7 +41,7 @@ public error: string;
      const username = this.loginForm.value["username"];
      const password = this.loginForm.value["password"];
      this.auth.login(username, password).subscribe(
-         result => this.router.navigate(['astuces']),
+         result => this.router.navigate(['tutos']),
        //  err => this.error = 'Could not authenticate'
        );
        }
@@ -51,7 +51,7 @@ public error: string;
     this.auth.login(username, password).subscribe(
         result =>{
           this.auths=true;
-           this.router.navigate(['astuces'])
+           this.router.navigate(['tutos'])
         },
         err => this.error = 'Could not authenticate'
       );

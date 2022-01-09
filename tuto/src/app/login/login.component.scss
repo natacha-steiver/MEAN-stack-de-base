@@ -1,13 +1,17 @@
 #login{
 
-  background-image: url(~src/assets/backgroundlogin.jpg);
+ // background-image: url(~src/assets/backgroundlogin.jpg);
 
 display: flex;
 justify-content:center;
 margin: 2em 0;
 height: 500px;
+*>{
+  max-width: 80vw;
+}
 form{
-      background: rgba(0,0,0,0.7);
+ 
+      background: rgba(255, 255, 255, 0.7);
   h4{
     text-align: center;
     width: 100%;
@@ -29,6 +33,7 @@ form{
   }
 
   input{
+    max-width: 80vw;
     font-size: 1.2em;
     margin: 1em;
     border-radius: 9px;

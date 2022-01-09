@@ -39,10 +39,20 @@ onFormSubmit(form:NgForm) {
   this.apiService.postTuto(form)
     .subscribe(res => {
         let id = res['_id'];
+    
         this.router.navigate(['tutos', id]);
       }, (err) => {
-        console.log(err);
+        console.log("err: "+err);
       });
+      this.getTutos();
+      this.tutoForm = this.formBuilder.group({
+        '_id': [null, Validators.min(3)],
+        'titre' : [null, Validators.required],
+        'texte' : [null, Validators.required],
+        'image' : [null, Validators.required],
+        });
+        
+
 }
 ngOnInit() {
   this.getTutos();
