@@ -1,0 +1,33 @@
+<header>
+
+  <nav>
+    <ul>
+     
+    
+      <li>        <a id="backoffice" routerLink="/tutos">Go to back office </a>      </li>
+      <li>
+
+        <a id="logout" class="nav-link" (click)="logout()" href="#" *ngIf="auth.loggedIn">Logout</a>
+      </li>
+    </ul>
+  </nav>
+
+
+
+
+
+
+
+</header>
+
+<main>
+
+
+
+  <router-outlet></router-outlet>
+
+<app-login *ngIf="!auth.loggedIn"></app-login>
+</main>
+<footer>
+  &copy; footer
+</footer>

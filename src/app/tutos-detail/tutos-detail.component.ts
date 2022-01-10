@@ -68,8 +68,7 @@ updateTuto(){
 }
 
         deleteTutos(id) {
-          //renvoit mauvais id
-        //const id = this.route.snapshot.paramMap.get('id');
+       // const id = this.route.snapshot.paramMap.get('id');
 
         this.apiService.deleteTuto(id)
           .subscribe(res => {

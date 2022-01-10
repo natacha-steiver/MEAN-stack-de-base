@@ -1,12 +1,27 @@
-Projet de base MEAN stack
+# Tuto
 
-- le stack MEAN
-- implémentation/test d'un JSON web token pour l'authentification
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.1.2.
 
+## Development server
 
-A faire:
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-- ajouter un template
-- Améliorer le JSON web token avec Bcrypt car mot de passe actuellement en clair.
-- Découper le projet en 2 parties distinctes backend/frontend
-- Extraire les routes hors du fichier server.js pour plus de logique et propreté
+## Code scaffolding
+
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+
+## Build
+
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+
+## Running unit tests
+
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+## Running end-to-end tests
+
+Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+
+## Further help
+
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).

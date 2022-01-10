@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse} from '@angular/common/http';
 
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs/Observable'; 
 
 import {Tuto} from './tutos';
 import {Astuce} from './astuces';
@@ -12,7 +12,9 @@ const httpOptions = {
     'Authorization': 'my-auth-token'
   })
 };
-
+@Injectable({
+  providedIn: 'root'
+})
 export class ApiService {
 
   constructor(private http: HttpClient) { }
@@ -42,7 +44,7 @@ return this.http.get<Astuce[]>('/api/astuces');
   }
 
   deleteTuto(id: any): Observable<{}> {
-//delete id est mauvais pq?
+//n'arrive pas a faire un http delete parce que c'est pas un number
   return this.http.delete(`/api/tutos/details/${id}`)
 
 }

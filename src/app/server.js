@@ -29,14 +29,31 @@ var apiRouter = require('./routes/tuto.js');
 
 
 app.use(express.static(path.join(__dirname, '../../dist/tuto')));
-app.use('/', express.static(path.join(__dirname, '../../dist/tuto')));
+//app.use('/', express.static(path.join(__dirname, '../../dist/tuto')));
+//utilise le point api pour faire route express
 app.use('/api', router);
-/*
-app.get('/', (req, res) => {
-    res.send({hello: 'world'});
-});
-*/
 
+//renvoie la vue angular sur le routing angular
+app.get('/tutos',(req, res, next) => {
+  res.sendFile(path.join(__dirname, "../../dist/tuto/index.html"));
+});
+app.get('/tutos/details/:id',(req, res, next) => {
+  res.sendFile(path.join(__dirname, "../../dist/tuto/index.html"));
+});
+
+
+/*
+nb: on pourrait essayer de mettre 
+app.use('/api', router);
+et mettre toutes les routes côtés clients sur /monApp/maRoute à la place de mnt ou c'est /maRoute (ex:/tutos on mettrait /monApp/tutos)
+et lui dire sur express qu'on renvoit toutes les routes qui commence par /monApp de renvoyer la vue
+avec:
+app.get('/monApp/*',(req, res, next) => {
+  res.sendFile(path.join(__dirname, "../../dist/tuto/index.html"));
+});
+
+
+*/
 
 
 
@@ -51,7 +68,7 @@ connection.once('open', () => {
 
 
 /*------------------------AUTHENTIFICATION-------------------------------*/
-router.route('/api/auth').get((req, res) => {
+router.route('/auth').get((req, res) => {
   USERS.find(req.params.id, {$set:req.body},(err, liste) => {
         if (err)
             console.log(err);
@@ -63,7 +80,7 @@ router.route('/api/auth').get((req, res) => {
 
     });
 });
-router.post('/api/auth', function(req, res) {
+router.post('/auth', function(req, res) {
   USERS.findOne({surname:req.body.surname},(err, liste) => {
           if( req.body.password != 'todo' ||  req.body.username != 'todo') return res.sendStatus(401);
         else
@@ -137,6 +154,7 @@ router.route('/tutos/details/:id').get((req, res) => {
 //
 
 router.route('/tutos/details/:id').delete((req, res, next) => {
+  //id response est mauvais
   Tuto.findOneAndRemove(req.params.id, (error, data) => {
   if (error) {
   return next(error);
@@ -176,7 +194,7 @@ Tuto.findByIdAndUpdate(req.params.id, {$set:req.body}, function (err, post) {
   });
 });
 
-app.use('/', router);
+app.use('*', router);
 /*
 Utilise node.js => bin/www
 // start our server on port 4201
