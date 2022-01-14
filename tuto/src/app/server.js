@@ -4,6 +4,8 @@ const app = express();
 const Tuto=require ('./models/tuto.js');
 const Astuce=require ('./models/astuce.js');
 const USERS=require ('./models/user.js');
+const multer = require("multer");
+var fs = require('fs');
 // Handle POST requests that come in formatted as JSON
 var bodyParser = require('body-parser');
 //app.use(express.json()) // for parsing application/json
@@ -29,14 +31,31 @@ var apiRouter = require('./routes/tuto.js');
 
 
 app.use(express.static(path.join(__dirname, '../../dist/tuto')));
-app.use('/', express.static(path.join(__dirname, '../../dist/tuto')));
-app.use('/api', apiRouter);
-/*
-app.get('/', (req, res) => {
-    res.send({hello: 'world'});
-});
-*/
+//app.use('/', express.static(path.join(__dirname, '../../dist/tuto')));
+//utilise le point api pour faire route express
+app.use('/api', router);
 
+//renvoie la vue angular sur le routing angular
+app.get('/tutos',(req, res, next) => {
+  res.sendFile(path.join(__dirname, "../../dist/tuto/index.html"));
+});
+app.get('/tutos/details/:id',(req, res, next) => {
+  res.sendFile(path.join(__dirname, "../../dist/tuto/index.html"));
+});
+
+
+/*
+nb: on pourrait essayer de mettre 
+app.use('/api', router);
+et mettre toutes les routes côtés clients sur /monApp/maRoute à la place de mnt ou c'est /maRoute (ex:/tutos on mettrait /monApp/tutos)
+et lui dire sur express qu'on renvoit toutes les routes qui commence par /monApp de renvoyer la vue
+avec:
+app.get('/monApp/*',(req, res, next) => {
+  res.sendFile(path.join(__dirname, "../../dist/tuto/index.html"));
+});
+
+
+*/
 
 
 
@@ -50,8 +69,26 @@ connection.once('open', () => {
 });
 
 
+
+
+const handleError = (err, res) => {
+ 
+     res
+    .status(500)
+    //.contentType("text/plain")
+    .end("Oops! Something went wrong: "+err);
+  
+// res.send(err)
+};
+
+const upload = multer({
+  dest: "/upload"
+  // you might also want to set some limits: https://github.com/expressjs/multer#limits
+});
+
+
 /*------------------------AUTHENTIFICATION-------------------------------*/
-router.route('/api/auth').get((req, res) => {
+router.route('/auth').get((req, res) => {
   USERS.find(req.params.id, {$set:req.body},(err, liste) => {
         if (err)
             console.log(err);
@@ -63,7 +100,7 @@ router.route('/api/auth').get((req, res) => {
 
     });
 });
-router.post('/api/auth', function(req, res) {
+router.post('/auth', function(req, res) {
   USERS.findOne({surname:req.body.surname},(err, liste) => {
           if( req.body.password != 'todo' ||  req.body.username != 'todo') return res.sendStatus(401);
         else
@@ -83,7 +120,7 @@ if(user || body.password == 'todo') return console.log( body.password, body.user
 */});
 //cette ligne bloque l'api sur 401 si client ne renvoit pas authorisation bearer
 //De plus angular guard ne veux pas afficher page si auth n'a pas été lancé (comme au refresh de la page)
-app.use(expressJwt({secret: 'todo-app-super-shared-secret'}).unless({path: ['/api/auth']}));
+//app.use(expressJwt({secret: 'todo-app-super-shared-secret'}).unless({path: ['/api/auth']}));
 
 /*----------------------------ROUTES-------------------------------------*/
 
@@ -101,6 +138,34 @@ router.route('/astuces').get((req, res) => {
     });
 });
 //-------------------tutos-------------------/
+router.post(
+  "/upload",
+  upload.single("file" /* name attribute of <file> element in your form */),
+  (req, res) => {
+    const tempPath = req.file.path;
+    const targetPath = path.join(__dirname, "./upload/image.png");
+
+    if (path.extname(req.file.originalname).toLowerCase() === ".png") {
+      fs.rename(tempPath, targetPath, err => {
+        if (err) return handleError(err, res);
+
+        res
+          .status(200)
+          .contentType("text/plain")
+          .end("File uploaded!");
+      });
+    } else {
+      fs.unlink(tempPath, err => {
+        if (err) return handleError(err, res);
+
+        res
+          .status(403)
+          .contentType("text/plain")
+          .end("Only .png files are allowed!");
+      });
+    }
+  }
+);
 //get tous les tutos
 
 router.route('/tutos').get((req, res) => {
@@ -137,6 +202,7 @@ router.route('/tutos/details/:id').get((req, res) => {
 //
 
 router.route('/tutos/details/:id').delete((req, res, next) => {
+  //id response est mauvais
   Tuto.findOneAndRemove(req.params.id, (error, data) => {
   if (error) {
   return next(error);
@@ -176,7 +242,7 @@ Tuto.findByIdAndUpdate(req.params.id, {$set:req.body}, function (err, post) {
   });
 });
 
-app.use('/', router);
+app.use('*', router);
 /*
 Utilise node.js => bin/www
 // start our server on port 4201

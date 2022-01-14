@@ -21,7 +21,7 @@ tutoForm: FormGroup;
   texte:string;
   image:string;
   id:any;
-
+  fileName = '';
   constructor(private renderer:Renderer2,private el:ElementRef ,private route: ActivatedRoute,private router: Router, private apiService: ApiService, private formBuilder: FormBuilder) {
  this.createForm();
 
@@ -54,6 +54,25 @@ createForm() {
     });
 
      }
+
+     onFileSelected(event) {
+
+      const file:File = event.target.files[0];
+    
+      if (file) {
+    
+          this.fileName = file.name;
+    
+          const formData = new FormData();
+    
+          formData.append("file", file);
+    
+          const upload$ =   this.apiService.uploadPicture(formData) ;
+    
+          upload$.subscribe();
+      }
+    }
+    
 updateTuto(){
   const id = this.route.snapshot.paramMap.get('id');
   const titre = this.tutoForm.value["titre"];
@@ -67,8 +86,8 @@ updateTuto(){
 
 }
 
-        deleteTutos() {
-        const id = this.route.snapshot.paramMap.get('id');
+        deleteTutos(id) {
+       // const id = this.route.snapshot.paramMap.get('id');
 
         this.apiService.deleteTuto(id)
           .subscribe(res => {

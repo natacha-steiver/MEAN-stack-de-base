@@ -23,6 +23,9 @@ title="Derniers tutoriels";
 tutos:Tuto[];
 tuto=[];
 tutoForm: FormGroup;
+fileName = '';
+
+
 constructor(private route: ActivatedRoute,private router: Router, private apiService: ApiService, private formBuilder: FormBuilder) {
 this.createForm();
 }
@@ -59,6 +62,23 @@ ngOnInit() {
 
   //this.deleteTutos();
   //this.tableau.push("hhhhhhhhhhhhhhhhhhhhhh","yyyy");
+}
+onFileSelected(event) {
+
+  const file:File = event.target.files[0];
+
+  if (file) {
+
+      this.fileName = file.name;
+
+      const formData = new FormData();
+
+      formData.append("file", file);
+
+      const upload$ =   this.apiService.uploadPicture(formData) ;
+
+      upload$.subscribe();
+  }
 }
 
 

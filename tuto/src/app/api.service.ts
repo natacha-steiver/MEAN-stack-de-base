@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse} from '@angular/common/http';
 
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs/Observable'; 
 
 import {Tuto} from './tutos';
 import {Astuce} from './astuces';
@@ -23,29 +23,29 @@ export class ApiService {
 
 
 getAstuces(): Observable<Tuto[]>{
-return this.http.get<Astuce[]>('/astuces');
+return this.http.get<Astuce[]>('/api/astuces');
 }
 
 //tuto
 
   getTutos(): Observable<Tuto[]>{
-  return this.http.get<Tuto[]>('/tutos');
+  return this.http.get<Tuto[]>('/api/tutos');
   }
 
   getTuto(id): Observable<any> {
 
-    let API_URL = `/tutos/details/${id}`;
+    let API_URL = `/api/tutos/details/${id}`;
     return this.http.get(API_URL)
   }
 
   postTuto(data): Observable<any> {
-    return this.http.post('/tutos/add', data)
+    return this.http.post('/api/tutos/add', data)
 
   }
 
   deleteTuto(id: any): Observable<{}> {
 //n'arrive pas a faire un http delete parce que c'est pas un number
-  return this.http.delete(`/tutos/details/${id}`)
+  return this.http.delete(`/api/tutos/details/${id}`)
 
 }
 
@@ -55,7 +55,12 @@ return this.http.get<Astuce[]>('/astuces');
       const obj = {
         titre,texte
       };
-      return this.http.put(`/tutos/details/${id}`, obj)
+      return this.http.put(`/api/tutos/details/${id}`, obj)
   }
+
+  uploadPicture(img): Observable<any>  {
+    return this.http.post(`/api/upload`, img)
+}
+
 
 }

@@ -29,7 +29,19 @@
                 <input  id="image" placeholder="image" formControlName="image">
 
                   <span *ngIf="!tutoForm.get('image').valid && tutoForm.get('image').touched">Please enter picture</span>
-
+                 
+                  <input type="file" class="file-input" name="file"
+                  (change)="onFileSelected($event)" #fileUpload>
+           
+           <div class="file-upload">
+           
+              {{fileName || "No file uploaded yet."}}
+           
+               <button mat-mini-fab color="primary" class="upload-btn"
+                 (click)="fileUpload.click()">
+                   <mat-icon>attach_file</mat-icon>
+               </button>
+           </div>
 
 
   <div>

@@ -24,7 +24,7 @@
 
 
     </article>
-  <a id="delete" (click)="deleteTutos()" routerLink="/tutos/details/{{tuto._id}}"> <i  class="fas fa-trash-alt fa-2x"></i>delete</a>
+  <a id="delete" (click)="deleteTutos(tuto._id)" routerLink="/tutos/details/{{tuto._id}}"> <i  class="fas fa-trash-alt fa-2x"></i>delete</a>
 
 
 
@@ -64,7 +64,19 @@
 
                       <span *ngIf="!tutoForm.get('image').valid && tutoForm.get('image').touched">Please enter picture</span>
 
-
+                      <input type="file" class="file-input" name="file"
+                      (change)="onFileSelected($event)" #fileUpload>
+               
+               <div class="file-upload">
+               
+                  {{fileName || "No file uploaded yet."}}
+               
+                   <button mat-mini-fab color="primary" class="upload-btn"
+                     (click)="fileUpload.click()">
+                       <mat-icon>attach_file</mat-icon>
+                   </button>
+               </div>
+    
 
       <div>
         <button type="submit" [disabled]="!tutoForm.valid" >save2</button>
