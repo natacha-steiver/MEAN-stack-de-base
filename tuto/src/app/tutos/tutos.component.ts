@@ -46,6 +46,7 @@ addTuto() {
   this.apiService.postTuto(_id,titre,texte,image)
     .subscribe(res => {
         let id = res['_id'];
+          
         
     //    this.router.navigate(['tutos', id]);
       }, (err) => {
@@ -53,7 +54,7 @@ addTuto() {
       });
    
       this.getTutos();
-
+      this.tutoForm.reset();
 }
 ngOnInit() {
   this.getTutos();

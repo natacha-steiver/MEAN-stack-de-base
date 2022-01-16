@@ -67,11 +67,12 @@ export class TutosDetailComponent implements OnInit {
     const image = this.fileName;
     this.apiService.updateTuto(titre,id,texte,image).subscribe(res => {
       this.getTuto();
+        
       console.log("update ok")
     }, (err) => {
       console.log(err);
     });
-    
+    this.tutoForm.reset();
   }
 
   /*
@@ -85,39 +86,51 @@ export class TutosDetailComponent implements OnInit {
     }, (err) => {
       console.log(err);
     });
-    
-  }
-  */
- 
-  deleteTutos(id) {
-    // const id = this.route.snapshot.paramMap.get('id');
-    
-    this.apiService.deleteTuto(id)
-    .subscribe(res => {
-      // ne marche qu'avec des nulbers : this.conseils.splice(id, 1);
-      this.router.navigate(['/tutos']);
-    }, (err) => {
-      console.log(err);
-    }
-    );
-    
-  }
-  getTuto(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-    this.apiService.getTuto(id)
-    .subscribe(tuto => this.tuto = tuto);
-  }
-  
-  
-  
-  
-  ngOnInit(): void {
-    this.getTuto();
-    
-    
-    
-  }
-  
-  
-  
+
+     }
+updateTuto(){
+  const id = this.route.snapshot.paramMap.get('id');
+  const titre = this.tutoForm.value["titre"];
+  const texte = this.tutoForm.value["texte"];
+  const image = this.tutoForm.value["image"];
+  this.apiService.updateTuto(titre,id,texte,image).subscribe(res => {
+    this.router.navigate(['/tutos']);
+  }, (err) => {
+    console.log(err);
+  });
+
+}
+*/
+        deleteTutos(id) {
+          //renvoit mauvais id
+        //const id = this.route.snapshot.paramMap.get('id');
+
+        this.apiService.deleteTuto(id)
+          .subscribe(res => {
+            // ne marche qu'avec des nulbers : this.conseils.splice(id, 1);
+            this.router.navigate(['/tutos']);
+            }, (err) => {
+              console.log(err);
+            }
+          );
+
+        }
+          getTuto(): void {
+            const id = this.route.snapshot.paramMap.get('id');
+            this.apiService.getTuto(id)
+              .subscribe(tuto => this.tuto = tuto);
+          }
+
+
+
+
+                  ngOnInit(): void {
+                    this.getTuto();
+
+
+
+                  }
+
+
+
 }
