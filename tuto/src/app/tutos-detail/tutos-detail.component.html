@@ -37,9 +37,9 @@
 
 
     <form [formGroup]="tutoForm" (ngSubmit)="onFormSubmit(tutoForm.value)" id="form">
-      <label for="titre">Titre: </label>
+      <label class="block" for="titre">Titre: </label>
 
-        <input  id="titre" placeholder="titre" formControlName="titre" >
+        <input class="block" id="titre" placeholder="titre" formControlName="titre" >
 
           <span *ngIf="!tutoForm.get('titre').valid && tutoForm.get('titre').touched">Please enter titre</span>
 
@@ -51,35 +51,35 @@
               <span *ngIf="!tutoForm.get('_id').valid && tutoForm.get('_id').touched">Please enter id</span>
 
 
-              <label for="texte">Texte: </label>
+              <label for="texte" class="block">Texte: </label>
 
-                <textarea id="texte" placeholder="here your text" formControlName="texte">
+                <textarea class="block" id="texte" placeholder="here your text" formControlName="texte">
                 </textarea>
 
                   <span *ngIf="!tutoForm.get('texte').valid && tutoForm.get('texte').touched">Please enter text</span>
 
-                  <label for="titre">Image: </label>
+                  <label for="titre" class="block">Image: </label>
 
-                    <input  id="image" placeholder="image" formControlName="image" >
+                    <input [hidden]="true"  id="image" placeholder="image" formControlName="image" >
 
                       <span *ngIf="!tutoForm.get('image').valid && tutoForm.get('image').touched">Please enter picture</span>
 
-                      <input type="file" class="file-input" name="file"
+                      <input [hidden]="true" type="file" class="file-input" name="file"
                       (change)="onFileSelected($event)" #fileUpload>
                
-               <div class="file-upload">
+               <div class="file-upload block">
                
                   {{fileName || "No file uploaded yet."}}
                
                    <button mat-mini-fab color="primary" class="upload-btn"
                      (click)="fileUpload.click()">
-                       <mat-icon>attach_file</mat-icon>
+                       <mat-icon class="iconDownload">attach_file</mat-icon>
                    </button>
                </div>
     
 
       <div>
-        <button type="submit" [disabled]="!tutoForm.valid" >save2</button>
+        <button (click)="update()" [disabled]="!tutoForm.valid" >save2</button>
       </div>
     </form>
 

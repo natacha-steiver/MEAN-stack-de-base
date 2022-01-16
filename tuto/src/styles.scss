@@ -12,6 +12,14 @@ body{
 li{
   list-style-type: none;
 }
-input:not(#_id),label:not(#id){
+.block{
   display:block;
+}
+
+.upload-btn{
+  background: none;
+  border: none;
+}
+.iconDownload{
+  color:blue;
 }

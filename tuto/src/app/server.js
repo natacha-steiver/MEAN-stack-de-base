@@ -36,26 +36,11 @@ app.use(express.static(path.join(__dirname, '../../dist/tuto')));
 app.use('/api', router);
 
 //renvoie la vue angular sur le routing angular
-app.get('/tutos',(req, res, next) => {
-  res.sendFile(path.join(__dirname, "../../dist/tuto/index.html"));
-});
-app.get('/tutos/details/:id',(req, res, next) => {
+app.get(/^\/(?!api($|\/.*))/,(req, res, next) => {
   res.sendFile(path.join(__dirname, "../../dist/tuto/index.html"));
 });
 
 
-/*
-nb: on pourrait essayer de mettre 
-app.use('/api', router);
-et mettre toutes les routes côtés clients sur /monApp/maRoute à la place de mnt ou c'est /maRoute (ex:/tutos on mettrait /monApp/tutos)
-et lui dire sur express qu'on renvoit toutes les routes qui commence par /monApp de renvoyer la vue
-avec:
-app.get('/monApp/*',(req, res, next) => {
-  res.sendFile(path.join(__dirname, "../../dist/tuto/index.html"));
-});
-
-
-*/
 
 
 
@@ -82,7 +67,7 @@ const handleError = (err, res) => {
 };
 
 const upload = multer({
-  dest: "/upload"
+  dest: "../../dist/tuto/assets"
   // you might also want to set some limits: https://github.com/expressjs/multer#limits
 });
 
@@ -143,7 +128,7 @@ router.post(
   upload.single("file" /* name attribute of <file> element in your form */),
   (req, res) => {
     const tempPath = req.file.path;
-    const targetPath = path.join(__dirname, "./upload/image.png");
+    const targetPath = path.join(__dirname, "../../dist/tuto/assets/"+req.file.originalname);
 
     if (path.extname(req.file.originalname).toLowerCase() === ".png") {
       fs.rename(tempPath, targetPath, err => {
@@ -202,17 +187,25 @@ router.route('/tutos/details/:id').get((req, res) => {
 //
 
 router.route('/tutos/details/:id').delete((req, res, next) => {
-  //id response est mauvais
-  Tuto.findOneAndRemove(req.params.id, (error, data) => {
-  if (error) {
-  return next(error);
-  } else {
-  res.status(200).json({
-  msg: data
-  })
-  }
-  })
-  })
+  //!!! difference between findOneAndDelete and findOneAndRemove (find+modify=replace)
+  const id=req.params.id;
+  Tuto.findById(req.params.id,(err, liste) => {
+    if (err)
+        console.log(err);
+    else
+     // console.log(req.params.id);
+     Tuto.deleteOne({ _id: id }, function (err,data) {
+        if (err) {
+          return next(err);
+          } else {
+          res.status(200).json({
+          msg: id
+          })
+          }
+      });
+
+});
+});
 
 
 

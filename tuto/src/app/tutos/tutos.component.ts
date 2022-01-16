@@ -37,24 +37,22 @@ this.tutoForm = this.formBuilder.group({
 'image' : [null, Validators.required],
 });
 }
-onFormSubmit(form:NgForm) {
+addTuto() {
+  const _id = null;
+  const titre = this.tutoForm.value["titre"];
+  const texte = this.tutoForm.value["texte"];
+  const image = this.fileName;
 
-  this.apiService.postTuto(form)
+  this.apiService.postTuto(_id,titre,texte,image)
     .subscribe(res => {
         let id = res['_id'];
-    
-        this.router.navigate(['tutos', id]);
+        
+    //    this.router.navigate(['tutos', id]);
       }, (err) => {
         console.log("err: "+err);
       });
+   
       this.getTutos();
-      this.tutoForm = this.formBuilder.group({
-        '_id': [null, Validators.min(3)],
-        'titre' : [null, Validators.required],
-        'texte' : [null, Validators.required],
-        'image' : [null, Validators.required],
-        });
-        
 
 }
 ngOnInit() {

@@ -38,7 +38,8 @@ return this.http.get<Astuce[]>('/api/astuces');
     return this.http.get(API_URL)
   }
 
-  postTuto(data): Observable<any> {
+  postTuto(_id,titre,texte,image): Observable<any> {
+    const data={_id,titre,texte,image}
     return this.http.post('/api/tutos/add', data)
 
   }
@@ -53,7 +54,7 @@ return this.http.get<Astuce[]>('/api/astuces');
 
   updateTuto(titre, id,texte,image): Observable<any>  {
       const obj = {
-        titre,texte
+        titre,texte,image
       };
       return this.http.put(`/api/tutos/details/${id}`, obj)
   }
