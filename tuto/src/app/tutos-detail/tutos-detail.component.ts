@@ -1,12 +1,9 @@
 import { Component, OnInit,Renderer2, ElementRef, } from '@angular/core';
 import { ApiService } from '../api.service';
-import { FormControl,FormsModule,FormGroupDirective,ReactiveFormsModule, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
-
+import {  FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute,Router } from '@angular/router';
-import { Location } from '@angular/common';
 
 
-import { Tuto }         from '../tutos';
 
 @Component({
   selector: 'app-tutos-detail',

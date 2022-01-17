@@ -4,11 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TutosComponent } from './tutos/tutos.component';
-import { AstucesComponent } from './astuces/astuces.component';
-import { ActualitesComponent } from './actualites/actualites.component';
-import { ActualitesDetailComponent } from './actualites-detail/actualites-detail.component';
 import { TutosDetailComponent } from './tutos-detail/tutos-detail.component';
-import { AstucesDetailComponent } from './astuces-detail/astuces-detail.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FormsModule,ReactiveFormsModule  }   from '@angular/forms';
@@ -31,11 +27,7 @@ export function tokenGetter() {
   declarations: [
     AppComponent,
     TutosComponent,
-    AstucesComponent,
-    ActualitesComponent,
-    ActualitesDetailComponent,
     TutosDetailComponent,
-    AstucesDetailComponent,
     LoginComponent,
     UserListComponentComponent
   ],
@@ -48,25 +40,25 @@ export function tokenGetter() {
     AppRoutingModule,
     HttpClientModule,
     JwtModule.forRoot({
-  config: {
-    tokenGetter: tokenGetter,
-    whitelistedDomains: ['localhost:4000'],
-    blacklistedRoutes: ['localhost:4000/api/auth']
-  }
-})
-
+      config: {
+        tokenGetter: tokenGetter,
+        whitelistedDomains: ['localhost:4000'],
+        blacklistedRoutes: ['localhost:4000/api/auth']
+      }
+    })
+    
   ],
   providers: [AuthService,
-  AuthGuard,{
-    provide: HTTP_INTERCEPTORS,
-    useClass: TokenInterceptor,
-    multi: true
-  }],
-  bootstrap: [AppComponent]
-})
-export class AppModule {
-  constructor() {
-     // Add an icon to the library for convenient access in other components
-    library.add(fas,faTrash );
-   }
-}
+    AuthGuard,{
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }],
+    bootstrap: [AppComponent]
+  })
+  export class AppModule {
+    constructor() {
+      // Add an icon to the library for convenient access in other components
+      library.add(fas,faTrash );
+    }
+  }
