@@ -1,0 +1,86 @@
+
+<section id="tutos">
+  <h2>{{title}}</h2>
+  <h3>Modifier / supprimer un tutoriel </h3>
+  <article>
+    
+    <figure>
+      <img src="../../assets/{{tuto.image}}" alt="">
+      <figcaption></figcaption>
+    </figure>
+    <div>
+      <h3>  {{tuto.titre}}</h3>
+      <p>
+        
+        {{tuto.texte }}
+      </p>
+      
+      
+      
+      
+      
+    </div>
+    
+    
+    
+  </article>
+  <a id="delete" (click)="deleteTutos(tuto._id)" routerLink="/tutos/details/{{tuto._id}}"> <i  class="fas fa-trash-alt fa-2x"></i>delete</a>
+  
+  
+  
+  
+</section>
+
+
+
+
+
+
+<form [formGroup]="tutoForm" (ngSubmit)="onFormSubmit(tutoForm.value)" id="form">
+  <label class="block" for="titre">Titre: </label>
+  
+  <input class="block" id="titre" placeholder="titre" formControlName="titre" >
+  
+  <span *ngIf="!tutoForm.get('titre').valid && tutoForm.get('titre').touched">Please enter titre</span>
+  
+  
+  <label [hidden]="true" id="id" for="_id">Id: </label>
+  
+  <input [hidden]="true"  id="_id" value="{{tuto._id}}" placeholder="{{tuto._id}}" formControlName="_id">
+  
+  <span *ngIf="!tutoForm.get('_id').valid && tutoForm.get('_id').touched">Please enter id</span>
+  
+  
+  <label for="texte" class="block">Texte: </label>
+  
+  <textarea class="block" id="texte" placeholder="here your text" formControlName="texte">
+  </textarea>
+  
+  <span *ngIf="!tutoForm.get('texte').valid && tutoForm.get('texte').touched">Please enter text</span>
+  
+  <label for="titre" class="block">Image: </label>
+  
+  <input [hidden]="true"  id="image" placeholder="image" formControlName="image" >
+  
+  <span *ngIf="!tutoForm.get('image').valid && tutoForm.get('image').touched">Please enter picture</span>
+  
+  <input [hidden]="true" type="file" class="file-input" name="file"
+  (change)="onFileSelected($event)" #fileUpload>
+  
+  <div class="file-upload block">
+    
+    {{fileName || "No file uploaded yet."}}
+    
+    <button mat-mini-fab color="primary" class="upload-btn"
+    (click)="fileUpload.click()">
+    <mat-icon class="iconDownload">attach_file</mat-icon>
+  </button>
+</div>
+
+
+<div>
+  <button (click)="update()" [disabled]="!tutoForm.valid" >save2</button>
+</div>
+</form>
+
+<router-outlet></router-outlet>

@@ -1,0 +1,88 @@
+<section id="tutos">
+  <h2>{{title}}</h2>
+  <h3>Ajouter un tutoriel:</h3>
+  <form id="tutoForm" [formGroup]="tutoForm" (ngSubmit)="onFormSubmit(tutoForm.value)">
+    <label for="titre" class="block">Titre: </label>
+    
+    <input  class="block" id="titre" placeholder="titre" formControlName="titre">
+    
+    <span *ngIf="!tutoForm.get('titre').valid && tutoForm.get('titre').touched">Please enter titre</span>
+    
+    
+    <label id="id" [hidden]="true"  for="_id">Id: </label>
+    
+    <input [hidden]="true"  id="_id" value="{{tuto._id}}" placeholder="{{tuto._id}}" >
+    
+    <span *ngIf="!tutoForm.get('_id').valid && tutoForm.get('_id').touched">Please enter id</span>
+    
+    
+    <label class="block" for="texte">Texte: </label>
+    
+    <textarea class="block" id="texte" placeholder="here your text" formControlName="texte">
+    </textarea>
+    
+    <span *ngIf="!tutoForm.get('texte').valid && tutoForm.get('texte').touched">Please enter text</span>
+    
+    
+    <label for="image" class="block">Image: </label>
+    
+    <input [hidden]="true"  id="image" placeholder="image" >
+    
+    
+    <input [hidden]="true" type="file" class="file-input" name="file"
+    (change)="onFileSelected($event)" #fileUpload>
+    
+    <div class="file-upload">
+      
+      {{fileName || "No file uploaded yet."}}
+      
+      <button mat-mini-fab color="primary" class="upload-btn block"
+      (click)="fileUpload.click()">
+      <mat-icon  class="iconDownload">attach_file</mat-icon>
+    </button>
+  </div>
+  
+  
+  <div>
+    
+    <button (click)="addTuto()"  >save</button>
+  </div>
+</form>
+
+<ul>
+  
+  <li *ngFor="let tuto of tutos">
+    <article>
+      
+      <figure>
+        <img src="../../assets/{{tuto.image}}" alt="">
+        <figcaption></figcaption>
+      </figure>
+      <div >
+        <h3 >  {{tuto.titre}}</h3>
+        <p>
+          <!--Pipe utile !!!!!!!-->
+          {{tuto.texte | slice:0:300}} ...
+        </p>
+        
+        
+        <a routerLink="/tutos/details/{{tuto._id}}">
+          Lire la suite
+        </a>
+        
+        
+        
+        
+      </div>
+      
+      
+      
+    </article>
+  </li>
+</ul>
+
+
+
+</section>
+
+<router-outlet></router-outlet>
