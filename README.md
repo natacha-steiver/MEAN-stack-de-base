@@ -6,7 +6,8 @@ Projet de base MEAN stack
 
 A faire:
 
-- ajouter un template
+- Ajouter un template
 - Revoir taille max (width) pour image/paragraphe
 - Faire une route angular /tutorials pour un get quand on est pas loggé
+- Mettre les infos importantes token dans fichier .ENV
 
