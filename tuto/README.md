@@ -1,3 +1,19 @@
+<<<<<<< HEAD
+Projet de base MEAN stack
+
+- le stack MEAN
+- implémentation/test d'un JSON web token pour l'authentification
+
+
+A faire:
+
+- ajouter un template
+- Améliorer le JSON web token avec Bcrypt car mot de passe actuellement en clair.
+- Extraire les routes hors du fichier server.js pour plus de logique et propreté
+- Revoir taille max (width) pour image/paragraphe
+- Faire une route angular /tutorials pour un get quand on est pas loggé
+- "/" peut servir pour expliqué le projet
+=======
 # Tuto
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.1.2.
@@ -25,3 +41,4 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+>>>>>>> 390bb8a (verify token)

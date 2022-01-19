@@ -14,11 +14,6 @@ _id: Schema.Types.ObjectId,
       type: String,
       required:true,
       uppercase:true
-
-
-
-
-
     },
     image:{
       type: String
