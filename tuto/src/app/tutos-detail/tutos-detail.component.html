@@ -1,7 +1,7 @@
 
 <section id="tutos">
   <h2>{{title}}</h2>
-  <h3>Modifier / supprimer un tutoriel </h3>
+  <h3>Update/ delete a tutorial </h3>
   <article>
     
     <figure>
@@ -37,11 +37,11 @@
 
 
 <form [formGroup]="tutoForm" (ngSubmit)="onFormSubmit(tutoForm.value)" id="form">
-  <label class="block" for="titre">Titre: </label>
+  <label class="block" for="titre">Title: </label>
   
-  <input class="block" id="titre" placeholder="titre" formControlName="titre" >
+  <input class="block" id="titre" placeholder="title" formControlName="titre" >
   
-  <span *ngIf="!tutoForm.get('titre').valid && tutoForm.get('titre').touched">Please enter titre</span>
+  <span *ngIf="!tutoForm.get('titre').valid && tutoForm.get('titre').touched">Please enter title</span>
   
   
   <label [hidden]="true" id="id" for="_id">Id: </label>
@@ -51,16 +51,16 @@
   <span *ngIf="!tutoForm.get('_id').valid && tutoForm.get('_id').touched">Please enter id</span>
   
   
-  <label for="texte" class="block">Texte: </label>
+  <label for="texte" class="block">Text: </label>
   
   <textarea class="block" id="texte" placeholder="here your text" formControlName="texte">
   </textarea>
   
   <span *ngIf="!tutoForm.get('texte').valid && tutoForm.get('texte').touched">Please enter text</span>
   
-  <label for="titre" class="block">Image: </label>
+  <label for="titre" class="block">Picture: </label>
   
-  <input [hidden]="true"  id="image" placeholder="image" formControlName="image" >
+  <input [hidden]="true"  id="image" placeholder="picture" formControlName="image" >
   
   <span *ngIf="!tutoForm.get('image').valid && tutoForm.get('image').touched">Please enter picture</span>
   
@@ -79,7 +79,7 @@
 
 
 <div>
-  <button (click)="update()" [disabled]="!tutoForm.valid" >save2</button>
+  <button (click)="update()" [disabled]="!tutoForm.valid" >Update</button>
 </div>
 </form>
 

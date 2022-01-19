@@ -2,11 +2,11 @@
   <h2>{{title}}</h2>
   <h3>Ajouter un tutoriel:</h3>
   <form id="tutoForm" [formGroup]="tutoForm" (ngSubmit)="onFormSubmit(tutoForm.value)">
-    <label for="titre" class="block">Titre: </label>
+    <label for="titre" class="block">Title: </label>
     
-    <input  class="block" id="titre" placeholder="titre" formControlName="titre">
+    <input  class="block" id="titre" placeholder="title" formControlName="titre">
     
-    <span *ngIf="!tutoForm.get('titre').valid && tutoForm.get('titre').touched">Please enter titre</span>
+    <span *ngIf="!tutoForm.get('titre').valid && tutoForm.get('titre').touched">Please enter title</span>
     
     
     <label id="id" [hidden]="true"  for="_id">Id: </label>
@@ -16,7 +16,7 @@
     <span *ngIf="!tutoForm.get('_id').valid && tutoForm.get('_id').touched">Please enter id</span>
     
     
-    <label class="block" for="texte">Texte: </label>
+    <label class="block" for="text">Text: </label>
     
     <textarea class="block" id="texte" placeholder="here your text" formControlName="texte">
     </textarea>
@@ -24,9 +24,9 @@
     <span *ngIf="!tutoForm.get('texte').valid && tutoForm.get('texte').touched">Please enter text</span>
     
     
-    <label for="image" class="block">Image: </label>
+    <label for="image" class="block">Picture: </label>
     
-    <input [hidden]="true"  id="image" placeholder="image" >
+    <input [hidden]="true"  id="image" placeholder="Picture" >
     
     
     <input [hidden]="true" type="file" class="file-input" name="file"
@@ -67,7 +67,7 @@
         
         
         <a routerLink="/tutos/details/{{tuto._id}}">
-          Lire la suite
+          Read more
         </a>
         
         
