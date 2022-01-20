@@ -2,29 +2,6 @@
 header{
   
   position: relative;
-  nav{
-    background: #e2ebec;
-    width: 100%;
-    position: absolute;
-    bottom:-3em;
-    font-size: 2em;
-    ul{
-      padding:0;
-      text-align: center;
-      li{
-        list-style-type: none;
-        display: flex;
-        justify-content: space-around;
-        a{
-          
-          text-decoration: none;
-          margin: .5em;
-          color:#fff;
-          
-        }
-      }
-    }
-  }
   h1{
     text-align: center;
     
@@ -47,16 +24,11 @@ header{
     
     display: flex;
     justify-content: center;
-    a{
-      text-decoration: none;
-      color:#fff;
-      font-size: 2em;
-    }
   }
-  background-image: url(~src/assets/header.jpg);
-  background-repeat: no-repeat;
-  background-size: cover ;
-  min-height:50vh;
+ // background-image: url(~src/assets/header.jpg);
+ // background-repeat: no-repeat;
+ // background-size: cover ;
+ // min-height:50vh;
   
 }
 
@@ -138,9 +110,11 @@ main{
   
 }
 footer{
-  color:#fff;
+  color:rgb(94, 92, 92);
   padding: 2em;
   background: #e2ebec;
+  position: relative;
+  top:5rem;
 }
 
 #logout,#backoffice{

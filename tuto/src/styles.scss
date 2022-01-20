@@ -4,16 +4,20 @@
 *{
   box-sizing: border-box;
 }
-body{
+body,html{
   margin: 0;
+  padding: 0;
+  width: 100%;
 }
 
-
+section{
+  padding: .5rem;
+}
 li{
   list-style-type: none;
 }
 .block{
-  display:block;
+  //display:block;
 }
 
 .upload-btn{
@@ -22,4 +26,69 @@ li{
 }
 .iconDownload{
   color:blue;
+}
+input{
+  max-height: 3rem;
+}
+input,textarea{
+  min-width: 100px;
+  margin: .5rem 0;
+  border-radius: 9px;
+  padding: 0.5em;
+  background: rgba(0, 0, 0, 0);
+  max-width:100%;
+}
+label{
+  margin: .5rem;
+  line-height: 2.5rem;
+}
+form:not(.arrayCrud){
+  padding: 2em;
+}
+form{
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+ul{
+  padding: 0;
+}
+label{
+  display: none;
+}
+div{
+  margin: .5rem;
+  padding: .5rem;
+}
+a{
+  padding: 2em;
+}
+
+.button{
+  
+  min-width: 8rem;
+  color:#2caec2;
+  font-size: 1.3em;
+  padding: .5em;
+  border: #2caec2 solid 3px;
+  background: rgba(0,0,0,0);
+  &:hover{
+    color:#fff;
+    background-color:  #2caec2;
+  }
+}
+
+button{
+  a{
+    color:#fff;
+    text-decoration: none;
+    &:hover{
+      color:rgb(223, 217, 217);
+    }
+  
+  }
+  &:hover{
+    color:rgb(223, 217, 217);
+  }
+
 }

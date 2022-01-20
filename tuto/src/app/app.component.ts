@@ -9,10 +9,26 @@ import { AuthService } from './auth.service';
 })
 export class AppComponent {
   title:'tuto';
+  logged=false;
   constructor(private auth: AuthService, private router: Router) { }
+  
   
   logout() {
     this.auth.logout();
+    this.logged=false;
     this.router.navigate(['login']);
   }
+
+  ngOnInit(): void {
+
+   
+    if (localStorage.getItem('access_token')) {
+      this.logged=true;
+    }else{
+      this.logged=false;
+      this.logout();
+    }
+             
+  }
+
 }

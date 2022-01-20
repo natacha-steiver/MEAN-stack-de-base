@@ -19,6 +19,7 @@ import { AuthGuard } from './auth.guard';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './token.interceptor'
 import { UserListComponentComponent } from './user-list-component/user-list-component.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 // ...
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -39,6 +40,7 @@ export function tokenGetter() {
     MatIconModule,
     AppRoutingModule,
     HttpClientModule,
+    NgbModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,

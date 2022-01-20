@@ -2,13 +2,13 @@
 <section id="tutos">
   <h2>{{title}}</h2>
   <h3>Update/ delete a tutorial </h3>
-  <article>
+  <article class="row">
     
-    <figure>
+    <figure class="col-12 col-sm-5 col-lg-5">
       <img src="../../assets/{{tuto.image}}" alt="">
       <figcaption></figcaption>
     </figure>
-    <div>
+    <div class="col-12 col-sm-6 col-lg-6">
       <h3>  {{tuto.titre}}</h3>
       <p>
         
@@ -17,14 +17,14 @@
       
       
       
-      
+      <a *ngIf="mobile" id="delete" (click)="deleteTutos(tuto._id)" routerLink="/tutos/details/{{tuto._id}}"> <i  class="fas fa-trash-alt fa-2x"></i>delete</a>
+
       
     </div>
     
     
     
   </article>
-  <a id="delete" (click)="deleteTutos(tuto._id)" routerLink="/tutos/details/{{tuto._id}}"> <i  class="fas fa-trash-alt fa-2x"></i>delete</a>
   
   
   
@@ -36,12 +36,17 @@
 
 
 
-<form [formGroup]="tutoForm" (ngSubmit)="onFormSubmit(tutoForm.value)" id="form">
-  <label class="block" for="titre">Title: </label>
+<form *ngIf="mobile" [formGroup]="tutoForm" (ngSubmit)="onFormSubmit(tutoForm.value)" id="form">
+  <div>
+    <label class="block" for="titre">Title: </label>
   
-  <input class="block" id="titre" placeholder="title" formControlName="titre" >
+    <input class="block" id="titre" placeholder="title" formControlName="titre" >
+    
+    <span *ngIf="!tutoForm.get('titre').valid && tutoForm.get('titre').touched">Please enter title</span>
   
-  <span *ngIf="!tutoForm.get('titre').valid && tutoForm.get('titre').touched">Please enter title</span>
+  </div>
+
+
   
   
   <label [hidden]="true" id="id" for="_id">Id: </label>
@@ -51,36 +56,103 @@
   <span *ngIf="!tutoForm.get('_id').valid && tutoForm.get('_id').touched">Please enter id</span>
   
   
-  <label for="texte" class="block">Text: </label>
+  <div>
+    <label for="texte" class="block">Text: </label>
   
-  <textarea class="block" id="texte" placeholder="here your text" formControlName="texte">
-  </textarea>
-  
-  <span *ngIf="!tutoForm.get('texte').valid && tutoForm.get('texte').touched">Please enter text</span>
-  
-  <label for="titre" class="block">Picture: </label>
-  
-  <input [hidden]="true"  id="image" placeholder="picture" formControlName="image" >
-  
-  <span *ngIf="!tutoForm.get('image').valid && tutoForm.get('image').touched">Please enter picture</span>
-  
-  <input [hidden]="true" type="file" class="file-input" name="file"
-  (change)="onFileSelected($event)" #fileUpload>
-  
-  <div class="file-upload block">
+    <textarea class="block" id="texte" placeholder="here your text" formControlName="texte">
+    </textarea>
     
-    {{fileName || "No file uploaded yet."}}
+    <span *ngIf="!tutoForm.get('texte').valid && tutoForm.get('texte').touched">Please enter text</span>
+  
+  </div>
+
+  <div>
+    <label for="titre" class="block">Picture: </label>
+  
+    <input [hidden]="true"  id="image" placeholder="picture" formControlName="image" >
     
-    <button mat-mini-fab color="primary" class="upload-btn"
-    (click)="fileUpload.click()">
-    <mat-icon class="iconDownload">attach_file</mat-icon>
-  </button>
-</div>
+    <span *ngIf="!tutoForm.get('image').valid && tutoForm.get('image').touched">Please enter picture</span>
+    
+    <input [hidden]="true" type="file" class="file-input" name="file"
+    (change)="onFileSelected($event)" #fileUpload>
+    
+    <div class="file-upload block">
+      
+      {{fileName || "No file"}}
+      
+      <button mat-mini-fab color="primary" class="upload-btn"
+      (click)="fileUpload.click()">
+      <mat-icon class="iconDownload">attach_file</mat-icon>
+    </button>
+  </div>
+  
+  </div>
 
 
 <div>
-  <button (click)="update()" [disabled]="!tutoForm.valid" >Update</button>
+  <button id="updateBtn" (click)="update()" [disabled]="!tutoForm.valid" class="btn btn-primary">Update a tutorial</button>
 </div>
 </form>
+
+
+
+<form class="arrayCrud" *ngIf="!mobile" id="tutoForm" [formGroup]="tutoForm" (ngSubmit)="onFormSubmit(tutoForm.value)">
+
+  <table  class="table table-striped table-responsive">
+  
+    <thead>
+    <tr>
+      <th scope="col-12">Action</th>
+      <th scope="col-12">Title</th>
+      <th scope="col-12"  >Text</th>
+      <th scope="col-12" >Picture</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr >
+      <th scope="row">Update</th>
+      <td>
+        <input  class="block" id="titre" placeholder="title" formControlName="titre">
+        <span *ngIf="!tutoForm.get('titre').valid && tutoForm.get('titre').touched">Please enter title</span>
+      </td>
+      <td [hidden]="true" >
+        <input  id="_id" value="{{tuto._id}}" placeholder="{{tuto._id}}" >
+      </td>
+      <td>
+        <textarea class="block" id="texte" placeholder="here your text" formControlName="texte">
+        </textarea>
+        
+        <span *ngIf="!tutoForm.get('texte').valid && tutoForm.get('texte').touched">Please enter text</span>
+  
+      </td>
+      <td>
+      
+        <input [hidden]="true"  id="image" placeholder="Picture" >
+        
+        <input [hidden]="true" type="file" class="file-input" name="file"
+        (change)="onFileSelected($event)" #fileUpload>
+        
+        <div class="file-upload">
+          
+          {{fileName || "No file"}}
+          
+          <button mat-mini-fab color="primary" class="upload-btn block"
+          (click)="fileUpload.click()">
+          <mat-icon  class="iconDownload">attach_file</mat-icon>
+        </button>
+        </div>
+    
+      </td>
+        <td>
+          <button (click)="update()" [disabled]="!tutoForm.valid" class="btn btn-primary">Update</button>
+        </td>
+  
+  
+    </tr>
+    </tbody>
+  </table>
+  
+  </form>
+  
 
 <router-outlet></router-outlet>

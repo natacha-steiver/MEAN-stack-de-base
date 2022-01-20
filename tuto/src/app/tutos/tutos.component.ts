@@ -3,7 +3,7 @@ import { Tuto } from '../tutos';
 import { ApiService } from '../api.service';
 import {FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute,Router } from '@angular/router';
-
+import { AuthService } from '../auth.service';
 
 
 
@@ -14,16 +14,26 @@ import { ActivatedRoute,Router } from '@angular/router';
 })
 export class TutosComponent implements OnInit {
   
-  title="Derniers tutoriels";
+  title="The latest tutorials";
   tutos:Tuto[];
   tuto=[];
   tutoForm: FormGroup;
   fileName = '';
+  mobile=false;
+  logged=false;
   
   
-  constructor(private route: ActivatedRoute,private router: Router, private apiService: ApiService, private formBuilder: FormBuilder) {
+  constructor(private auth: AuthService,private route: ActivatedRoute,private router: Router, private apiService: ApiService, private formBuilder: FormBuilder) {
     this.createForm();
   }
+  
+  
+  logout() {
+    this.auth.logout();
+    this.logged=false;
+    this.router.navigate(['login']);
+  }
+
   createForm() {
     this.tutoForm = this.formBuilder.group({
       '_id': [null, Validators.min(3)],
@@ -32,6 +42,22 @@ export class TutosComponent implements OnInit {
       'image' : [null, Validators.required],
     });
   }
+  deleteTutos(id) {
+    //renvoit mauvais id
+  //const id = this.route.snapshot.paramMap.get('id');
+
+  this.apiService.deleteTuto(id)
+    .subscribe(res => {
+      // ne marche qu'avec des nulbers : this.conseils.splice(id, 1);
+      this.getTutos();
+      }, (err) => {
+        console.log(err);
+      }
+    );
+
+  }
+
+
   addTuto() {
     const _id = null;
     const titre = this.tutoForm.value["titre"];
@@ -50,6 +76,9 @@ export class TutosComponent implements OnInit {
   }
   ngOnInit() {
     this.getTutos();
+    if (window.screen.width < 992) { // 768px portrait
+      this.mobile = true;
+    }
   }
 
   onFileSelected(event) {
@@ -83,6 +112,7 @@ export class TutosComponent implements OnInit {
       ()=>{
         console.log("Vous n'êtes pas autorisé à voir le contenu"),
         alert("Vous n'êtes pas autorisé à voir le contenu");
+        this.logout();
       },
       ()=>console.log('completed'+this.tutos[0]));
       

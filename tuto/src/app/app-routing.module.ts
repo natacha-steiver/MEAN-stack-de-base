@@ -9,9 +9,10 @@ import { AuthGuard } from './auth.guard';
 //!!! login s'affiche 2X avec lien retour vers backoffice
 const routes: Routes = [
   { path: 'tutos', component: TutosComponent,canActivate: [AuthGuard] },
-  { path: 'tutos/details/:id', component: TutosDetailComponent },
+  { path: 'tutos/details/:id', component: TutosDetailComponent,canActivate: [AuthGuard]  },
   { path: 'users', component: UserListComponentComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent},
+  { path: '**', redirectTo: 'tutos' } 
 ];
 
 @NgModule({

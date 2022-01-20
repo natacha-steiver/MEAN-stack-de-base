@@ -10,7 +10,8 @@
     max-width: 80vw;
   }
   form{
-    
+    position: relative;
+    top: 5rem;
     background: rgba(255, 255, 255, 0.7);
     h4{
       text-align: center;
@@ -35,7 +36,6 @@
     input{
       max-width: 80vw;
       font-size: 1.2em;
-      margin: 1em;
       border-radius: 9px;
       padding: .5em;
       background: rgba(0,0,0,0);
