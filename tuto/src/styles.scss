@@ -36,14 +36,14 @@ input,textarea{
   border-radius: 9px;
   padding: 0.5em;
   background: rgba(0, 0, 0, 0);
-  max-width:100%;
+  max-width:80vw;
 }
 label{
   margin: .5rem;
   line-height: 2.5rem;
 }
 form:not(.arrayCrud){
-  padding: 2em;
+ // padding: 2em;
 }
 form{
   display: flex;
@@ -57,7 +57,7 @@ label{
   display: none;
 }
 div{
-  margin: .5rem;
+  margin: .5rem 0;
   padding: .5rem;
 }
 a{
@@ -79,6 +79,7 @@ a{
 }
 
 button{
+  margin:.5rem 0;
   a{
     color:#fff;
     text-decoration: none;
@@ -91,4 +92,25 @@ button{
     color:rgb(223, 217, 217);
   }
 
+}
+h1,h2,h3,div,p{
+  overflow-wrap:break-word;
+}
+p{
+  word-break: break-word;
+}
+
+//material form css example 
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+td {
+  padding-right: 8px;
 }

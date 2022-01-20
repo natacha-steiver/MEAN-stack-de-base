@@ -64,48 +64,22 @@
       }
     }
 
-    update(){
+    update(img){
       
       const id = this.route.snapshot.paramMap.get('id');
       const titre = this.tutoForm.value["titre"];
       const texte = this.tutoForm.value["texte"];
-      const image = this.fileName;
+      const image = this.fileName.length>=1?this.fileName:img;
       this.apiService.updateTuto(titre,id,texte,image).subscribe(res => {
         this.getTuto();
-          
-        console.log("update ok")
+        this.router.navigate(['/tutos']);
+        //console.log("update ok")
       }, (err) => {
         console.log(err);
       });
       this.tutoForm.reset();
     }
 
-    /*
-    updateTuto(){
-      const id = this.route.snapshot.paramMap.get('id');
-      const titre = this.tutoForm.value["titre"];
-      const texte = this.tutoForm.value["texte"];
-      const image = this.tutoForm.value["image"];
-      this.apiService.updateTuto(titre,id,texte,image).subscribe(res => {
-        this.router.navigate(['/tutos']);
-      }, (err) => {
-        console.log(err);
-      });
-
-      }
-  updateTuto(){
-    const id = this.route.snapshot.paramMap.get('id');
-    const titre = this.tutoForm.value["titre"];
-    const texte = this.tutoForm.value["texte"];
-    const image = this.tutoForm.value["image"];
-    this.apiService.updateTuto(titre,id,texte,image).subscribe(res => {
-      this.router.navigate(['/tutos']);
-    }, (err) => {
-      console.log(err);
-    });
-
-  }
-  */
           deleteTutos(id) {
             //renvoit mauvais id
           //const id = this.route.snapshot.paramMap.get('id');

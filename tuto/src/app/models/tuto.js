@@ -8,18 +8,16 @@ let Tuto= new Schema({
 _id: Schema.Types.ObjectId,
 
     titre: {
-        type: String
+        type: String,
+        uppercase:true
     },
     texte:{
       type: String,
-      required:true,
-      uppercase:true
+      required:true
     },
     image:{
       type: String
     },
 });
 
-//var collectionName = 'liste'
-//var Liste=mongoose.model('Liste', ListeSchema,collectionName);
 module.exports= mongoose.model('Tuto', Tuto);

@@ -136,12 +136,20 @@
           {{tuto.texte | slice:0:300}} ...
         </p>
         
-        <button class="btn btn-primary">
+      <div class="row">
+        <button class="btn btn-primary col-sm-6">
           <a routerLink="/tutos/details/{{tuto._id}}">
-            Update/Delete
+            Update
           </a>        
-  
         </button>
+        
+        <button type="button" class="btn btn-danger col-sm-6" (click)="deleteTutos(tuto._id)" >
+          <a routerLink="/tutos">
+            Delete
+          </a>        
+        </button>     
+
+      </div>
         
       </div>   
     </article>

@@ -20,6 +20,9 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './token.interceptor'
 import { UserListComponentComponent } from './user-list-component/user-list-component.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // ...
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -34,6 +37,7 @@ export function tokenGetter() {
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
     FontAwesomeModule,
@@ -41,6 +45,8 @@ export function tokenGetter() {
     AppRoutingModule,
     HttpClientModule,
     NgbModule,
+    MatFormFieldModule,
+    MatInputModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,

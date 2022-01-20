@@ -1,36 +1,8 @@
 
 <section id="tutos">
   <h2>{{title}}</h2>
-  <h3 *ngIf="mobile" >Update/delete a tutorial </h3>
-  <h3 *ngIf="!mobile" >Update </h3>
-  <article class="row">
-    
-    <figure class="col-12 col-sm-5 col-lg-5">
-      <img src="../../assets/{{tuto.image}}" alt="">
-      <figcaption></figcaption>
-    </figure>
-    <div class="col-12 col-sm-6 col-lg-6">
-      <h3>  {{tuto.titre}}</h3>
-      <p>
-        
-        {{tuto.texte }}
-      </p>
-      
-      
-      
-      <a *ngIf="mobile" id="delete" (click)="deleteTutos(tuto._id)" routerLink="/tutos/details/{{tuto._id}}"> <i  class="fas fa-trash-alt fa-2x"></i>delete</a>
+  <h3>Update a tutorial</h3>
 
-      
-    </div>
-    
-    
-    
-  </article>
-  
-  
-  
-  
-</section>
 
 
 
@@ -41,7 +13,7 @@
   <div>
     <label class="block" for="titre">Title: </label>
   
-    <input class="block" id="titre" placeholder="title" formControlName="titre" >
+    <input class="block" id="titre" value="{{tuto.titre}}" placeholder="{{tuto.titre}}"  formControlName="titre" >
     
     <span *ngIf="!tutoForm.get('titre').valid && tutoForm.get('titre').touched">Please enter title</span>
   
@@ -60,7 +32,7 @@
   <div>
     <label for="texte" class="block">Text: </label>
   
-    <textarea class="block" id="texte" placeholder="here your text" formControlName="texte">
+    <textarea class="block" id="texte" value="{{tuto.texte}}" placeholder="{{tuto.texte}}" formControlName="texte">
     </textarea>
     
     <span *ngIf="!tutoForm.get('texte').valid && tutoForm.get('texte').touched">Please enter text</span>
@@ -70,7 +42,7 @@
   <div>
     <label for="titre" class="block">Picture: </label>
   
-    <input [hidden]="true"  id="image" placeholder="picture" formControlName="image" >
+    <input [hidden]="true"  id="image" value="{{tuto.image}}" placeholder="{{tuto.image}}" formControlName="image" >
     
     <span *ngIf="!tutoForm.get('image').valid && tutoForm.get('image').touched">Please enter picture</span>
     
@@ -91,7 +63,7 @@
 
 
 <div>
-  <button id="updateBtn" (click)="update()" [disabled]="!tutoForm.valid" class="btn btn-primary">Update a tutorial</button>
+  <button id="updateBtn" (click)="update(tuto.image)" [disabled]="!tutoForm.valid" class="btn btn-primary">Update a tutorial</button>
 </div>
 </form>
 
@@ -113,14 +85,14 @@
     <tr >
       <th scope="row">Update</th>
       <td>
-        <input  class="block" id="titre" placeholder="title" formControlName="titre">
+        <input  class="block" id="titre" value="{{tuto.titre}}" placeholder="{{tuto.titre}}" formControlName="titre">
         <span *ngIf="!tutoForm.get('titre').valid && tutoForm.get('titre').touched">Please enter title</span>
       </td>
       <td [hidden]="true" >
         <input  id="_id" value="{{tuto._id}}" placeholder="{{tuto._id}}" >
       </td>
       <td>
-        <textarea class="block" id="texte" placeholder="here your text" formControlName="texte">
+        <textarea class="block" id="texte" value="{{tuto.texte}}" placeholder="{{tuto.texte}}" formControlName="texte">
         </textarea>
         
         <span *ngIf="!tutoForm.get('texte').valid && tutoForm.get('texte').touched">Please enter text</span>
@@ -128,7 +100,7 @@
       </td>
       <td>
       
-        <input [hidden]="true"  id="image" placeholder="Picture" >
+        <input [hidden]="true"  id="image" value="{{tuto.image}}" placeholder="{{tuto.image}}" >
         
         <input [hidden]="true" type="file" class="file-input" name="file"
         (change)="onFileSelected($event)" #fileUpload>
@@ -145,7 +117,7 @@
     
       </td>
         <td>
-          <button (click)="update()" [disabled]="!tutoForm.valid" class="btn btn-primary">Update</button>
+          <button (click)="update(tuto.image)" [disabled]="!tutoForm.valid" class="btn btn-primary">Update</button>
         </td>
   
   
@@ -157,3 +129,4 @@
   
 
 <router-outlet></router-outlet>
+</section>

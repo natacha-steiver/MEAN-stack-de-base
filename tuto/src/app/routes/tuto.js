@@ -11,6 +11,7 @@ const expressJwt = require('express-jwt');
 const bcrypt = require("bcrypt");
 const blacklist = require('express-jwt-blacklist');
 const randtoken = require('rand-token');
+require('dotenv').config();
 const saltRounds = 10;
 /*
 !! warning:
@@ -96,7 +97,7 @@ router.post('/auth', async function(req, res) {
       if (cmp) {
         //   ..... further code to maintain authentication like jwt or sessions
         //res.send("Auth Successful");
-        token = jwt.sign({userID: USERS.id}, 'todo-app-super-shared-secret', {expiresIn: '2h'});
+        token = jwt.sign({userID: USERS.id}, process.env.SECRET_KEY, {expiresIn: '2h'});
         
         res.send({token});
         
@@ -117,7 +118,7 @@ router.post('/auth', async function(req, res) {
 This code send json raw rather than angular view when you refresh page (browser)
 but the issue is resolved by  res.sendFile that send folder view for api paths (server.js)
 */
-app.use(expressJwt({secret: 'todo-app-super-shared-secret'}).unless({path: ['/api/auth']}));
+app.use(expressJwt({secret: process.env.SECRET_KEY}).unless({path: ['/api/auth']}));
 
 /*----------------------------ROUTING-------------------------------------*/
 
