@@ -1,0 +1,153 @@
+/* You can add global styles to this file, and also import other style files */
+
+
+*{
+  box-sizing: border-box;
+}
+body,html{
+  position: relative;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+section{
+  padding: .5rem;
+}
+li{
+  list-style-type: none;
+}
+.block{
+  //display:block;
+}
+
+.upload-btn{
+  background: none;
+  border: none;
+}
+.iconDownload{
+  color:blue;
+}
+input{
+  max-height: 3rem;
+}
+input,textarea{
+  min-width: 100px;
+  margin: .5rem 0;
+  border-radius: 9px;
+  padding: 0.5em;
+  background: rgba(0, 0, 0, 0);
+  max-width:80vw;
+}
+label{
+  margin: .5rem;
+  line-height: 2.5rem;
+}
+form:not(.arrayCrud){
+ // padding: 2em;
+}
+form{
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+ul{
+  padding: 0;
+}
+label{
+  display: none;
+}
+div{
+  margin: .5rem 0;
+  padding: .5rem;
+}
+a{
+ // padding: 2em;
+}
+
+.button{
+  
+  min-width: 8rem;
+  color:#2caec2;
+  font-size: 1.3em;
+  padding: .5em;
+  border: #2caec2 solid 3px;
+  background: rgba(0,0,0,0);
+  &:hover{
+    color:#fff;
+    background-color:  #2caec2;
+  }
+}
+
+button{
+  margin:.5rem 0;
+  a{
+    color:#fff;
+    text-decoration: none;
+    &:hover{
+      color:rgb(223, 217, 217);
+    }
+  
+  }
+  &:hover{
+    color:rgb(223, 217, 217);
+  }
+
+}
+h1,h2,h3,div,p{
+  overflow-wrap:break-word;
+}
+p{
+  word-break: break-word;
+}
+
+//material form css example 
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+td {
+  padding-right: 8px;
+}
+
+tbody, td, tfoot, th, thead, tr{
+  text-align: center;
+  vertical-align: middle;
+}
+main{
+  min-height: 100vh;
+}
+
+.Input {
+  outline: 0;
+  border-width: 0 0 2px;
+  border-color: rgba(209, 206, 206, 0.473) ;
+  min-height: calc(1.5em + .75rem + 2px);
+
+}
+.Input:focus {
+  border-color: rgba(52, 186, 226, 0.527)
+}
+
+textarea.Input {
+  outline: 0;
+  border-width:  2px;
+  border-color: rgba(209, 206, 206, 0.473) ;
+  min-height: calc(1.5em + .75rem + 2px);
+
+}
+
+.Thead{
+  border-color: rgba(209, 206, 206, 0.473) ;
+}
+
+.table>:not(:first-child) {
+  border-top: 2px solid rgba(209, 206, 206, 0.473) ;
+}

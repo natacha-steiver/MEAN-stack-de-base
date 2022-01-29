@@ -1,0 +1,89 @@
+@media screen and(max-width:480px) {
+  figure{
+    width: 90vw;
+    min-width: 90vw;
+  }
+}
+@media screen and(min-width:481px) {
+  figure{
+   // width: 50vw;
+    //min-width: 50vw;
+   // max-width: 40vw;
+    overflow: hidden;
+  }
+}
+#addTutoBtn{
+  width: 100%;
+}
+#title-second{
+  position: relative;
+  top:2rem;
+}
+.arrayCrud{
+  padding:0;
+}
+#tutos{
+  form{
+input[type="text"], textarea {
+
+ // background-color : #d1d1d1;
+
+}
+  }
+padding: 2rem;
+/*
+h2{
+  padding-top: 2em;
+  font-size: 2em;
+  display: flex;
+  justify-content:center;
+  width: 100%;
+}
+*/
+h2,h3,h4{
+  color:#2CAEC2;
+  //margin-left: 1em;
+}
+
+article{
+display: flex;
+flex-wrap: wrap;
+flex-direction: row;
+h3{
+  width: 100%;
+}
+  a{
+    text-decoration: none;
+    color:#fff;
+  }
+
+  margin-top: 2rem;
+figure{
+margin: 0;
+padding: 2em;
+  img{
+
+    width:100%;
+    height: 100%;
+
+  }
+}
+
+div{
+
+
+
+overflow: hidden;
+padding: 2em;
+  p{
+    display: flex;
+    flex-wrap: wrap;
+    overflow-wrap: break-word;
+
+  }
+
+  //margin: 5em;
+
+}
+}
+}

@@ -1,0 +1,100 @@
+@media screen and(max-width:480px) {
+  figure{
+    width: 90vw;
+    min-width: 90vw;
+  }
+}
+@media screen and(min-width:481px) {
+  figure{
+   // width: 50vw;
+    //min-width: 50vw;
+    //max-width: 40vw;
+    overflow: hidden;
+  }
+}
+[hidden] {
+  display: none;
+}
+#updateBtn{
+  width: 100%;
+}
+#tutos{
+  position: relative;
+ // top: 5rem;
+  h2,h3,h4{
+    color:#2CAEC2;
+  }
+  i{
+    //margin: .5em .5em 1em 1em;
+  }
+  #delete{
+    
+    a{
+      margin-left: 1em;
+      text-decoration: none;
+      color:#2CAEC2;
+    }
+  }
+  margin-top: 1em;
+  padding: 2rem;
+  h2{
+    padding-top: 2em;
+    font-size: 2em;
+    display: flex;
+    justify-content:center;
+    width: 100%;
+  }
+  
+  article{
+    //display: flex;
+    //justify-content: center;
+    h3{
+      width: 100%;
+    }
+    a{
+      margin: 1rem 0;
+      display: block;
+      width: 5em;
+      padding: .5em;
+      text-decoration: none;
+      border:blue 1px solid;
+      border-radius: 5px;
+      background-color: #2CAEC2;
+      color:#fff;
+      
+    }
+    
+    margin-top: 7em;
+    figure{
+
+      padding: 2em;
+      margin-bottom: 1em;
+      img{
+        
+        width:100%;
+        
+      }
+    }
+    div{
+      padding: 2em;
+     // margin-left: 1em;
+     // max-width: 50%;
+      display: inline-block;
+      p{
+        display: flex;
+        flex-wrap: wrap;
+     word-break: break-all;
+
+     /* Non standard for WebKit */
+     word-break: break-word;
+
+        
+        
+      }
+      
+      //margin: 5em;
+      
+    }
+  }
+}
+

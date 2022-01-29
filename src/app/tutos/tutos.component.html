@@ -1,0 +1,198 @@
+<section id="tutos">
+  <h2>{{title}}</h2>
+  <h3 *ngIf="mobile" id="title-second">Add a tutorial</h3>
+  <form  *ngIf="mobile" id="tutoForm" [formGroup]="tutoForm" >
+    <div>
+      <label [hidden]="true"  for="image" class="block">Picture: </label>
+      
+      <input [hidden]="true"  id="image" value="angu.png" placeholder="angu.png"  >
+      
+      
+      <input [hidden]="true" type="file" class="file-input" name="file"
+      (change)="onFileSelected($event)" #fileUpload>
+      
+      <div class="file-upload">
+        
+        {{fileName || "no file png, jpg or jpeg"}}
+        
+        <button mat-mini-fab color="primary" class="upload-btn block"
+        (click)="fileUpload.click()">
+        <mat-icon  class="iconDownload">attach_file</mat-icon>
+      </button>
+    </div>
+  
+      </div>
+  
+    <div>
+      <label [hidden]="true" for="titre" class="block">Title: </label>
+    
+      <input  class="block form-control Input " id="titre" placeholder="title" formControlName="titre">
+      
+      <span *ngIf="!tutoForm.get('titre').valid && tutoForm.get('titre').touched">Please enter title</span>
+  
+    </div>
+
+    
+    
+    <label id="id" [hidden]="true"  for="_id">Id: </label>
+    
+    <input [hidden]="true"  id="_id" value="null" placeholder="null" >
+    
+    <span *ngIf="!tutoForm.get('_id').valid && tutoForm.get('_id').touched">Please enter id</span>
+    
+    <div>
+      <label [hidden]="true"  class="block" for="text">Text: </label>
+    
+      <textarea class="block form-control Input " id="texte" placeholder="here your text" formControlName="texte">
+      </textarea>
+      
+      <span *ngIf="!tutoForm.get('texte').valid && tutoForm.get('texte').touched">Please enter text</span>
+  
+    </div>
+
+    
+  
+  
+  <div id="addTutoBtn">
+    
+    <button (click)="addTuto()" [disabled]="!tutoForm.valid" class="btn btn-primary" >Add a tutorial</button>
+  </div>
+</form>
+
+<h3 *ngIf="mobile && tutosBool" id="title-second">Tutorials</h3>
+
+
+<form class="arrayCrud" *ngIf="!mobile" id="tutoForm" [formGroup]="tutoForm" (ngSubmit)="addTuto()">
+
+<table  class="table table-striped table-responsive">
+  <thead >
+    <tr>
+      <th scope="col-12">#</th>
+      <th scope="col-12"  >Picture</th>
+      <th scope="col-12"  >Title</th>
+      <th scope="col-12" >Text</th>
+      
+  
+    </tr>
+    </thead>
+  
+  <thead >
+  <tr>
+    <th scope="col-12"></th>
+    <th scope="col-12" >
+      <input [hidden]="true"  id="image" value="angu.png" placeholder="angu.png"  >
+      
+      <input [hidden]="true" type="file" class="file-input" name="file"
+      (change)="onFileSelected($event)" #fileUpload>
+      
+      <div class="file-upload">
+        
+        {{fileName || "no file png, jpg or jpeg"}}
+        
+        <button mat-mini-fab color="primary" class="upload-btn block"
+        (click)="fileUpload.click()">
+        <mat-icon  class="iconDownload">attach_file</mat-icon>
+      </button>
+      </div>
+
+    </th>
+
+    <th scope="col-12">
+      <input  class="block form-control Input   " id="titre" placeholder="title" formControlName="titre">
+      <span *ngIf="!tutoForm.get('titre').valid && tutoForm.get('titre').touched">Please enter title</span>
+
+    </th>
+    <th  [hidden]="true" scope="col-12">
+      <input  [hidden]="true"  id="_id" value="null" placeholder="null" formControlName="_id"  >
+
+    </th>
+    <th scope="col-12"  >
+      <textarea class="block form-control Input  " id="texte" placeholder="here your text" formControlName="texte">
+      </textarea>
+      <span *ngIf="!tutoForm.get('texte').valid && tutoForm.get('texte').touched">Please enter text</span>
+
+    </th>
+    <th scope="col-12" >
+      <button (click)="addTuto()" class="btn btn-primary" [disabled]="!tutoForm.valid" >Add</button>    
+
+    </th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <tr *ngFor="let tuto of tutos; index as i">
+    <th scope="row">{{ i + 1 }}</th>
+    <td scope="col-12"> 
+      <img [src]="'//' + imageUrl+tuto.image"  alt="" class="mr-2" style="width:10rem"/>
+    </td>
+    <td scope="col-12">
+
+    
+      {{tuto.titre}}
+    </td>
+    <td  scope="col-12">{{tuto.texte | slice:0:300}} ...</td>
+
+    <td  scope="col-12" >   
+      <button type="button" class="btn btn-primary">
+        <a routerLink="/tutos/details/{{tuto._id}}">
+          Update
+        </a>            
+      </button>     
+    </td>
+    <td  scope="col-12">   
+      <button type="button" class="btn btn-danger" (click)="deleteTutos(tuto._id)" >
+          Delete
+          
+      </button>     
+    </td>
+
+
+  </tr>
+  </tbody>
+</table>
+
+</form>
+
+
+<ul *ngIf="mobile">
+  
+  <li *ngFor="let tuto of tutos">
+    <article class="row"> 
+      
+      <figure class="col-12 col-sm-5 col-lg-5">
+      <img [src]="'//' + imageUrl+tuto.image"  alt="tuto.image" />
+        <figcaption></figcaption>
+      </figure>
+      <div class="col-12 col-sm-6 col-lg-6">
+        <h3 >  {{tuto.titre}}</h3>
+        <p>
+          <!--Pipe utile !!!!!!!-->
+          {{tuto.texte | slice:0:300}} ...
+        </p>
+        
+      <div class="row">
+        <button class="btn btn-primary col-sm-6">
+          <a routerLink="/tutos/details/{{tuto._id}}">
+            Update
+          </a>        
+        </button>
+        
+        <button type="button" class="btn btn-danger col-sm-6" (click)="deleteTutos(tuto._id)" >
+          <a routerLink="/tutos">
+            Delete
+          </a>        
+        </button>     
+
+      </div>
+        
+      </div>   
+    </article>
+  </li>
+</ul>
+
+
+
+
+</section>
+
+<router-outlet></router-outlet>
